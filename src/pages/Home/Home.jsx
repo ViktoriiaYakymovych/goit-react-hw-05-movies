@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 // import api from 'api';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 const Home = () => {
-  const [films, ] = useState([{id:1, original_title:'name1'}]);
+  const [films,] = useState([{id:1, original_title:'name1'}]);
 
   useEffect(() => {
     // const fetchMovies = async () => {
@@ -19,13 +19,7 @@ const Home = () => {
   return (
     <>
       <h1>Trending today</h1>
-      <ul>
-        {films.map(film => (
-          <li key={film.id}>
-            <NavLink to={`/movies/:${film.id}`}>{film.original_title}</NavLink>
-          </li>
-        ))}
-      </ul>
+      {films.length > 0 && <MoviesList films={films}/>}
     </>
   );
 };
