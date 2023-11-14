@@ -1,25 +1,40 @@
 import { useEffect, useState } from 'react';
-// import api from 'api';
+import api from 'api';
 import MoviesList from 'components/MoviesList/MoviesList';
+import Loader from 'components/Loader/Loader';
 
 const Home = () => {
-  const [films,] = useState([{id:1, original_title:'name1'}]);
+  const [films, setFilms] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    // const fetchMovies = async () => {
-    //   try {
-    //     const { results } = await api.fetchTrendsMovies();
-    //     setFilms(results);
-    //     console.log(results);
-    //   } catch (error) {}
-    // };
-    // fetchMovies();
-  }, [films]);
+    const controller = new AbortController();
+    const fetchMovies = async () => {
+      try {
+        setLoading(true);
+        const { results } = await api.fetchTrendsMovies(controller);
+        setFilms(results);
+      } catch (error) {
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMovies();
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   return (
     <>
       <h1>Trending today</h1>
-      {films.length > 0 && <MoviesList films={films}/>}
+      {films.length > 0 && <MoviesList films={films} />}
+      {loading && <Loader loading={loading} />}
+      {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
     </>
   );
 };

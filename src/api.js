@@ -3,10 +3,11 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://api.themoviedb.org/';
 const API_KEY = '48b2bba5f96af80717b061a99685cb65';
 
-const fetchTrendsMovies = async () => {
+const fetchTrendsMovies = async controller => {
   try {
     const { data } = await axios.get(
-      `/3/trending/movie/day?language=en-US&api_key=${API_KEY}`
+      `/3/trending/movie/day?language=en-US&api_key=${API_KEY}`,
+      { signal: controller.signal }
     );
     return data;
   } catch (err) {
@@ -14,10 +15,11 @@ const fetchTrendsMovies = async () => {
   }
 };
 
-const fetchSearchMovie = async query => {
+const fetchSearchMovie = async (query, controller) => {
   try {
     const { data } = await axios.get(
-      `/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=${API_KEY}`
+      `/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1&api_key=${API_KEY}`,
+      { signal: controller.signal }
     );
     return data;
   } catch (err) {
