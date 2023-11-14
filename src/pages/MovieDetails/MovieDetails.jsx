@@ -1,5 +1,52 @@
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import api from 'api';
+import { useEffect } from 'react';
+import Loader from 'components/Loader/Loader';
+import MovieCard from 'components/MovieCard/MovieCard';
+
 const MovieDetails = () => {
-  return <div>It's Movie's details</div>;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const { movieId } = useParams();
+  const [movieDetails, setMovieDetails] = useState({});
+
+  useEffect(() => {
+    if (!movieId) {
+      return;
+    }
+    const controller = new AbortController();
+    const id = movieId.slice(1);
+    async function fetchDetails() {
+      try {
+        setLoading(true);
+        const resp = await api.fetchMovieDetails(id, controller);
+        if (!resp) {
+          return;
+        }
+        setMovieDetails(resp);
+      } catch (error) {
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+          console.log(error.message);
+        }
+        console.log(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchDetails();
+    return () => {
+      controller.abort();
+    };
+  }, [movieId]);
+  return (
+    <>
+      <MovieCard movieDetails={movieDetails} />
+      {loading && <Loader loading={loading} />}
+      {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
+    </>
+  );
 };
 
 export default MovieDetails;

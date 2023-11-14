@@ -11,7 +11,7 @@ const fetchTrendsMovies = async controller => {
     );
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -23,36 +23,39 @@ const fetchSearchMovie = async (query, controller) => {
     );
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
-const fetchMovieDetails = async movieId => {
+const fetchMovieDetails = async (movieId, controller) => {
   try {
     const { data } = await axios.get(
-      `/3/movie/${movieId}?language=en-US&api_key=${API_KEY}`
+      `/3/movie/${movieId}?language=en-US&api_key=${API_KEY}`,
+      { signal: controller.signal }
     );
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
-const fetchMovieActors = async movieId => {
+const fetchMovieActors = async (movieId, controller) => {
   try {
     const { data } = await axios.get(
-      `/3/movie/${movieId}/credits?language=en-US&api_key=${API_KEY}`
+      `/3/movie/${movieId}/credits?language=en-US&api_key=${API_KEY}`,
+      { signal: controller.signal }
     );
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
-const fetchMovieReviews = async movieId => {
+const fetchMovieReviews = async (movieId, controller) => {
   try {
     const { data } = await axios.get(
-      `/3/movie/${movieId}/reviews?language=en-US&page=1&api_key=${API_KEY}`
+      `/3/movie/${movieId}/reviews?language=en-US&page=1&api_key=${API_KEY}`,
+      { signal: controller.signal }
     );
     console.log(data);
     return data;

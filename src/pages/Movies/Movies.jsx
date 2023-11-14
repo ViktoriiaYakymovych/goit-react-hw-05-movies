@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from 'api';
 import SearchMovieForm from 'components/SearchMovieForm/SearchMovieForm';
@@ -11,8 +10,6 @@ const Movies = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [filmQuery, setFilmQuery] = useState('');
-  // const [filmQuery, setFilmQuery] = useSearchParams();
-  // const film = filmQuery.get("film") ?? "";
 
   useEffect(() => {
     if (filmQuery === '') {
