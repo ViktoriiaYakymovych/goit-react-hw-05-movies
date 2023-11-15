@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import api from 'api';
 import { useEffect } from 'react';
@@ -44,6 +44,7 @@ const MovieDetails = () => {
       <MovieCard movieDetails={movieDetails} />
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
+      <Outlet/>
     </>
   );
 };

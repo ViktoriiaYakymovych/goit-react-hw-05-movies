@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
 
-const AdditionalInformation = ({ movieId }) => {
+const AdditionalInformation = () => {
   return (
     <section>
       <p>Additional information</p>
       <ul>
         <li>
-          <NavLink to={`/movies/:${movieId}/cast`}>Cast</NavLink>
+          <NavLink to="cast">Cast</NavLink>
         </li>
         <li>
-          <NavLink to={`/movies/:${movieId}/reviews`}>Reviews</NavLink>
+          <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
     </section>

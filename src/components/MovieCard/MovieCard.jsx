@@ -43,7 +43,7 @@ const MovieCard = ({
         <h3>Genres</h3>
         <p>{getGenres()}</p>
       </div>
-      <AdditionalInformation movieId={id} />
+      <AdditionalInformation />
     </section>
   );
 };
