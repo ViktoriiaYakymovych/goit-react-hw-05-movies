@@ -11,7 +11,9 @@ const fetchTrendsMovies = async controller => {
     );
     return data;
   } catch (err) {
-    // console.log(err);
+    if (err.code !== 'ERR_CANCELED') {
+      console.log(err);
+    }
   }
 };
 
@@ -23,7 +25,9 @@ const fetchSearchMovie = async (query, controller) => {
     );
     return data;
   } catch (err) {
-    // console.log(err);
+    if (err.code !== 'ERR_CANCELED') {
+      console.log(err);
+    }
   }
 };
 
@@ -35,7 +39,9 @@ const fetchMovieDetails = async (movieId, controller) => {
     );
     return data;
   } catch (err) {
-    // console.log(err);
+    if (err.code !== 'ERR_CANCELED') {
+      console.log(err);
+    }
   }
 };
 
@@ -47,7 +53,9 @@ const fetchMovieActors = async (movieId, controller) => {
     );
     return data;
   } catch (err) {
-    // console.log(err);
+    if (err.code !== 'ERR_CANCELED') {
+      console.log(err);
+    }
   }
 };
 
@@ -57,10 +65,11 @@ const fetchMovieReviews = async (movieId, controller) => {
       `/3/movie/${movieId}/reviews?language=en-US&page=1&api_key=${API_KEY}`,
       { signal: controller.signal }
     );
-    console.log(data);
     return data;
   } catch (err) {
-    console.log(err);
+    if (err.code !== 'ERR_CANCELED') {
+      console.log(err);
+    }
   }
 };
 

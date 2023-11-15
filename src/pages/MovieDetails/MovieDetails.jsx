@@ -8,8 +8,8 @@ import MovieCard from 'components/MovieCard/MovieCard';
 const MovieDetails = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
+  const { movieId } = useParams();
 
   useEffect(() => {
     if (!movieId) {
@@ -30,7 +30,6 @@ const MovieDetails = () => {
           setError(true);
           console.log(error.message);
         }
-        console.log(error.message);
       } finally {
         setLoading(false);
       }

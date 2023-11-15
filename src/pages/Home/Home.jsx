@@ -6,7 +6,7 @@ import Loader from 'components/Loader/Loader';
 const Home = () => {
   const [films, setFilms] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -14,11 +14,12 @@ const Home = () => {
       try {
         setLoading(true);
         const { results } = await api.fetchTrendsMovies(controller);
-        setFilms(results);
+        setFilms([...results]);
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') {
-          setError(true);
+          setError(error.message);
         }
+        setError(null);
       } finally {
         setLoading(false);
       }
