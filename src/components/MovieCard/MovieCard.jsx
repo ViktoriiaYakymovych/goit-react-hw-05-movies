@@ -2,44 +2,48 @@ import AdditionalInformation from 'components/AdditionalInformation/AdditionalIn
 
 const MovieCard = ({
   movieDetails: {
-    id,
-    // backdrop_path,
-    // poster_path,
+    backdrop_path,
+    poster_path,
     title,
+    release_date,
     vote_average,
     overview,
     genres,
   },
 }) => {
   function getGenres() {
-    if (genres === undefined) {
-      return;
-    } else {
-      return genres.map(genre => {
-        return `${genre.name},`;
-      });
-    }
+    const allGenres = [];
+    genres && genres.map(genre => allGenres.push(genre.name));
+    return allGenres.toString();
   }
 
-  // if (backdrop_path === null && poster_path === null) {
-  //   return (backdrop_path = 'Coming-soon.jpg');
-  // } else if (backdrop_path === null) {
-  //   return (backdrop_path = `https://image.tmdb.org/t/p/original/${poster_path}`);
-  // } else if (poster_path === null) {
-  //   return (backdrop_path = `https://image.tmdb.org/t/p/original/${backdrop_path}`);
-  // }
-  // {
-  //   `https://image.tmdb.org/t/p/original/${backdrop_path}`;
-  // }
+  const firstImg =
+    backdrop_path && `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+  const secondImg =
+    poster_path && `https://image.tmdb.org/t/p/original/${poster_path}`;
 
+  function getDate() {
+    if (release_date === undefined) {
+      return;
+    }
+    return release_date.slice(0, 4);
+  }
+
+  getDate();
   return (
     <section>
-      <img src="" alt="" />
+      <img src={firstImg || secondImg} alt={title} />
       <div>
-        <h2>{title}</h2>
+        <h2>{`${title} (${getDate()})`}</h2>
         <p>User score: {(vote_average * 10).toFixed()}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
+        {overview === '' ? (
+          <p>We don't have any overwiew.</p>
+        ) : (
+          <div>
+            <h3>Overview</h3>
+            <p>{overview}</p>
+          </div>
+        )}
         <h3>Genres</h3>
         <p>{getGenres()}</p>
       </div>

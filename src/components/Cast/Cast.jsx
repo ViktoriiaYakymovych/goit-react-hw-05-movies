@@ -38,19 +38,26 @@ const Cast = () => {
     };
   }, [movieId]);
 
-  // {
-  //   `https://image.tmdb.org/t/p/original/${profile_path}`;
-  // }
   return (
     <section>
       <ul>
-        {movieCast.map(cast => (
-          <li key={cast.id}>
-            <img src="" alt="" />
-            <p>{cast.name}</p>
-            <p>Character: {cast.character}</p>
-          </li>
-        ))}
+        {movieCast.length === 0 ? (
+          <p>We don't have any information about actors.</p>
+        ) : (
+          movieCast.map(cast => (
+            <li key={cast.id}>
+              <img
+                src={
+                  cast.profile_path &&
+                  `https://image.tmdb.org/t/p/original/${cast.profile_path}`
+                }
+                alt={cast.name}
+              />
+              <p>{cast.name}</p>
+              <p>Character: {cast.character}</p>
+            </li>
+          ))
+        )}
       </ul>
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
