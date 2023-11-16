@@ -21,8 +21,15 @@ const Movies = () => {
     const fetchMovies = async () => {
       try {
         setLoading(true);
-        const { results } = await api.fetchSearchMovie(value, controller);
-        setFilms(results);
+        const data = await api.fetchSearchMovie(value, controller);
+        if (data === undefined) {
+          return;
+        } else if (data.results.length === 0) {
+          return toast.error(
+            `Sorry, we didn't find any movie. Please, try to write another one.`
+          );
+        }
+        setFilms(data.results);
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') {
           setError(true);

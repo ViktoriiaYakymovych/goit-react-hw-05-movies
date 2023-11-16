@@ -1,7 +1,7 @@
-import { Outlet, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
 import api from 'api';
-import { useEffect } from 'react';
 import Loader from 'components/Loader/Loader';
 import MovieCard from 'components/MovieCard/MovieCard';
 
@@ -10,6 +10,8 @@ const MovieDetails = () => {
   const [error, setError] = useState(false);
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     if (!movieId) {
@@ -41,10 +43,14 @@ const MovieDetails = () => {
   }, [movieId]);
   return (
     <>
+      <NavLink to={backLinkHref}>
+        <FaArrowLeft />
+        Back to movies
+      </NavLink>
       <MovieCard movieDetails={movieDetails} />
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
-      <Outlet/>
+      <Outlet />
     </>
   );
 };

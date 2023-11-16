@@ -11,8 +11,8 @@ const MovieCard = ({
     genres,
   },
 }) => {
+  const allGenres = [];
   function getGenres() {
-    const allGenres = [];
     genres && genres.map(genre => allGenres.push(genre.name));
     return allGenres.toString();
   }
