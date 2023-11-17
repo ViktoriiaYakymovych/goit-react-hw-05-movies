@@ -15,6 +15,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+  margin: 0 auto;
+  color: black;
+  background: #EEF2F7;
+}
 
 html {
   box-sizing: border-box;
@@ -47,6 +56,7 @@ li {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 

@@ -1,18 +1,22 @@
-import { NavLink } from 'react-router-dom';
+import {
+  AdditionalList,
+  AdditionalSection,
+  Link,
+} from './AdditionalInformation.styled';
 
 const AdditionalInformation = () => {
   return (
-    <section>
-      <p>Additional information</p>
-      <ul>
+    <AdditionalSection>
+      <h3>Additional information</h3>
+      <AdditionalList>
         <li>
-          <NavLink to="cast">Cast</NavLink>
+          <Link to="cast">Cast</Link>
         </li>
         <li>
-          <NavLink to="reviews">Reviews</NavLink>
+          <Link to="reviews">Reviews</Link>
         </li>
-      </ul>
-    </section>
+      </AdditionalList>
+    </AdditionalSection>
   );
 };
 

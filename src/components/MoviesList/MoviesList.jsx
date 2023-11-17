@@ -1,17 +1,18 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { MovieUl, Link } from './MoviesList.styled';
 
 const MoviesList = ({ films }) => {
   const location = useLocation();
   return (
-    <ul>
+    <MovieUl>
       {films.map(film => (
         <li key={film.id}>
-          <NavLink to={`/movies/:${film.id}`} state={{ from: location }}>
+          <Link to={`/movies/:${film.id}`} state={{ from: location }}>
             {film.original_title}
-          </NavLink>
+          </Link>
         </li>
       ))}
-    </ul>
+    </MovieUl>
   );
 };
 

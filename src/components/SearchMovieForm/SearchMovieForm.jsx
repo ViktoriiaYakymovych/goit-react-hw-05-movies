@@ -1,15 +1,17 @@
+import { StyledForm, StyledInput, StyledBtn } from './SearchMovieForm.styled';
+
 const SearchMovieForm = ({ onSubmit }) => {
   return (
-    <form onSubmit={e => onSubmit(e)}>
-      <input
+    <StyledForm onSubmit={e => onSubmit(e)}>
+      <StyledInput
         type="text"
         name="film"
         autoComplete="off"
         autoFocus
         placeholder="Write to search movie..."
       />
-      <button type="submit">Search</button>
-    </form>
+      <StyledBtn type="submit">Search</StyledBtn>
+    </StyledForm>
   );
 };
 

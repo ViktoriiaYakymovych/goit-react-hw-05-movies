@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from 'api';
 import Loader from 'components/Loader/Loader';
+import { ReviewsItem, ReviewsList, ReviewsSection } from './Reviews.styled';
 
 const Reviews = () => {
   const [loading, setLoading] = useState(false);
@@ -38,22 +39,22 @@ const Reviews = () => {
     };
   }, [movieId]);
   return (
-    <section>
+    <ReviewsSection>
       {movieReviews.length === 0 ? (
         <p>We don't have any reviews for this movie</p>
       ) : (
-        <ul>
+        <ReviewsList>
           {movieReviews.map(review => (
-            <li key={review.id}>
+            <ReviewsItem key={review.id}>
               <h3>Author: {review.author}</h3>
               <p>{review.content}</p>
-            </li>
+            </ReviewsItem>
           ))}
-        </ul>
+        </ReviewsList>
       )}
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
-    </section>
+    </ReviewsSection>
   );
 };
 

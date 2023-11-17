@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from 'api';
 import SearchMovieForm from 'components/SearchMovieForm/SearchMovieForm';
 import MoviesList from 'components/MoviesList/MoviesList';
 import Loader from 'components/Loader/Loader';
-import { useSearchParams } from 'react-router-dom';
+import { MoviesSection } from './Movies.styled';
 
 const Movies = () => {
   const [films, setFilms] = useState([]);
@@ -58,12 +59,12 @@ const Movies = () => {
     e.target.reset();
   };
   return (
-    <>
+    <MoviesSection>
       <SearchMovieForm onSubmit={onSubmit} />
       {films.length > 0 && <MoviesList films={films} />}
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
-    </>
+    </MoviesSection>
   );
 };
 

@@ -1,9 +1,10 @@
-import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from 'api';
 import Loader from 'components/Loader/Loader';
 import MovieCard from 'components/MovieCard/MovieCard';
+import { MovieDetailsSection, Link } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -42,16 +43,18 @@ const MovieDetails = () => {
     };
   }, [movieId]);
   return (
-    <>
-      <NavLink to={backLinkHref}>
+    <MovieDetailsSection>
+      <Link to={backLinkHref}>
         <FaArrowLeft />
         Back to movies
-      </NavLink>
+      </Link>
       <MovieCard movieDetails={movieDetails} />
       {loading && <Loader loading={loading} />}
       {error && <p>Sorry, something went wrong. Please, try to update page.</p>}
-      <Outlet />
-    </>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+    </MovieDetailsSection>
   );
 };
 
