@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from 'api';
 import Loader from 'components/Loader/Loader';
@@ -12,7 +12,7 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     if (!movieId) {
@@ -44,7 +44,7 @@ const MovieDetails = () => {
   }, [movieId]);
   return (
     <MovieDetailsSection>
-      <Link to={backLinkHref}>
+      <Link to={backLinkHref.current}>
         <FaArrowLeft />
         Back to movies
       </Link>

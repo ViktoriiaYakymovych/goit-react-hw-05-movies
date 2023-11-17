@@ -20,8 +20,8 @@ const MovieCard = ({
 
   const firstImg = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   const secondImg = `https://image.tmdb.org/t/p/original/${poster_path}`;
-  // const defaultImg =
-  //   'https://image.tmdb.org/t/p/original//nQvoM7BMswq1raENOkOjCBt94gk.jpg';
+  const defaultImg =
+    'https://image.tmdb.org/t/p/original//nQvoM7BMswq1raENOkOjCBt94gk.jpg';
 
   function getDate() {
     if (release_date === undefined) {
@@ -35,7 +35,11 @@ const MovieCard = ({
     <>
       <MovieWrapper>
         <Img
-          src={(backdrop_path && firstImg) || (poster_path && secondImg)}
+          src={
+            (backdrop_path && firstImg) ||
+            (poster_path && secondImg) ||
+            defaultImg
+          }
           alt={title}
         />
         <Descriprion>
